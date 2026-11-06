@@ -1,16 +1,26 @@
 import time
 import requests
 
+# ====================================================
+# 🔥 TEST ISTANTANEO FORZATO PER IL CLOUD
+# ====================================================
+try:
+    url_test = "https://telegram.org"
+    payload_test = {"chat_id": "8692534224", "text": "🚀 CONNETTIVITÀ CLOUD RENDER FUNZIONANTE AL 100%!"}
+    requests.post(url_test, json=payload_test, timeout=10)
+    print("Notifica di test inviata all'avvio del server!")
+except Exception as e:
+    print(f"Errore nel test iniziale: {e}")
+# ====================================================
+
 def genera_report(novita, rimossi):
     orario = time.strftime("%Y-%m-%d %H:%M:%S")
     
-    # --- I TUOI DATI TELEGRAM ---
     TOKEN_TELEGRAM = "9092558730:AAG_JNLi-i-Kz3GBFoOuLMG7apP_xU1cpDs"
     ID_CHAT_TELEGRAM = "8692534224"
     
-    # Prepariamo il testo del messaggio in formato HTML
     messaggio = f"🔔 <b>AGGIORNAMENTO PUC ({orario})</b>\n\n"
-    scritto = True
+    scritto = False
     
     if novita:
         scritto = True
@@ -24,7 +34,6 @@ def genera_report(novita, rimossi):
         for r in rimossi:
             messaggio += f"• {r}\n"
             
-    # Salva comunque il file sul desktop per storico
     try:
         with open("report_tornei.txt", "a", encoding="utf-8") as f:
             f.write(f"\n=== AGGIORNAMENTO PUC DEL {orario} ===\n")
@@ -35,7 +44,6 @@ def genera_report(novita, rimossi):
     except Exception:
         pass
             
-    # Blocco invio Telegram corretto
     if scritto:
         try:
             url_tg = f"https://telegram.org{TOKEN_TELEGRAM}/sendMessage"
@@ -50,22 +58,10 @@ def genera_report(novita, rimossi):
                 print(f"Telegram ha rifiutato il messaggio. Errore: {risposta.text}")
             else:
                 print("Messaggio inviato a Telegram con successo!")
-                
         except Exception as e:
             print(f"Errore invio Telegram: {e}")
 
-# Ciclo continuo fisso per Render con TEST IMMEDIATO FORZATO
 if __name__ == "__main__":
-    (time.sleep(5)):
-    try:
-        # FORZIAMO IL MESSAGGIO FUORI DAL CICLO PER EVITARE BLOCCHI
-        import requests
-        url_tg = "https://telegram.org"
-        payload = {"chat_id": "8692534224", "text": "🚀 PROVA CLOUD RENDER INSERITA CON SUCCESSO!"}
-        requests.post(url_tg, json=payload, timeout=10)
-    except Exception:
-        pass
-
     while True:
         try:
             print("Controllo tornei FIT avviato sul cloud...")
