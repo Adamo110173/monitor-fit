@@ -53,12 +53,12 @@ def genera_report(novita, rimossi):
             print(f"Errore invio Telegram: {e}")
     if __name__ == "__main__":
     while True:
-        try:
+            try:
             # Sostituisci la riga qui sotto con il comando esatto 
             # che usava il tuo vecchio script per controllare i tornei
             print("Controllo tornei FIT avviato sul cloud...")
-        except Exception as e:
+            except Exception as e:
             print(f"Errore nel ciclo continuo: {e}")
             
-        # Aspetta 1 ora (3600 secondi) prima di fare il prossimo controllo
-        time.sleep(3600)
+            # Aspetta 1 ora (3600 secondi) prima di fare il prossimo controllo
+            time.sleep(3600)
