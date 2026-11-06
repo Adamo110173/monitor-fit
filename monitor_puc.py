@@ -10,7 +10,7 @@ def genera_report(novita, rimossi):
     
     # Prepariamo il testo del messaggio in formato HTML
     messaggio = f"🔔 <b>AGGIORNAMENTO PUC ({orario})</b>\n\n"
-    scritto = False
+    scritto = True
     
     if novita:
         scritto = True
