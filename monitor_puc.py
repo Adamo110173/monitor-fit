@@ -54,11 +54,13 @@ def genera_report(novita, rimossi):
         except Exception as e:
             print(f"Errore invio Telegram: {e}")
 
-# Ciclo continuo fisso per Render (Corretto senza errori di spazi)
+# Ciclo continuo fisso per Render con TEST IMMEDIATO
 if __name__ == "__main__":
     while True:
         try:
             print("Controllo tornei FIT avviato sul cloud...")
+            # FORZIAMO IL MESSAGGIO DI PROVA DAL CLOUD IMMEDIATAMENTE
+            genera_report(["Torneo di Test dal Cloud ☁️"], [])
         except Exception as e:
             print(f"Errore nel ciclo continuo: {e}")
             
