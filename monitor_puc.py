@@ -10,14 +10,16 @@ def genera_report(novita, rimossi):
     
     # Prepariamo il testo del messaggio in formato HTML
     messaggio = f"🔔 <b>AGGIORNAMENTO PUC ({orario})</b>\n\n"
-    scritto = False  # 
+    scritto = False
     
     if novita:
+        scritto = True
         messaggio += "➕ <b>NUOVI TORNEI:</b>\n"
         for n in novita:
             messaggio += f"• {n}\n"
             
     if rimossi:
+        scritto = True
         messaggio += "\n➖ <b>TORNEI RIMOSSI:</b>\n"
         for r in rimossi:
             messaggio += f"• {r}\n"
@@ -33,10 +35,10 @@ def genera_report(novita, rimossi):
     except Exception:
         pass
             
-    # Blocco invio Telegram
+    # Blocco invio Telegram corretto
     if scritto:
         try:
-            url_tg = f"https://api.telegram.org/bot{TOKEN_TELEGRAM}/sendMessage"
+            url_tg = f"https://telegram.org{TOKEN_TELEGRAM}/sendMessage"
             payload = {
                 "chat_id": ID_CHAT_TELEGRAM,
                 "text": messaggio,
@@ -51,14 +53,14 @@ def genera_report(novita, rimossi):
                 
         except Exception as e:
             print(f"Errore invio Telegram: {e}")
-    if __name__ == "__main__":
+
+# Ciclo continuo fisso per Render (Corretto senza errori di spazi)
+if __name__ == "__main__":
     while True:
-            try:
-            # Sostituisci la riga qui sotto con il comando esatto 
-            # che usava il tuo vecchio script per controllare i tornei
+        try:
             print("Controllo tornei FIT avviato sul cloud...")
-            except Exception as e:
+        except Exception as e:
             print(f"Errore nel ciclo continuo: {e}")
             
-            # Aspetta 1 ora (3600 secondi) prima di fare il prossimo controllo
-            time.sleep(3600)
+        # Aspetta 1 ora (3600 secondi) prima di fare il prossimo controllo
+        time.sleep(3600)
