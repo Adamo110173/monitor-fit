@@ -54,13 +54,20 @@ def genera_report(novita, rimossi):
         except Exception as e:
             print(f"Errore invio Telegram: {e}")
 
-# Ciclo continuo fisso per Render con TEST IMMEDIATO
+# Ciclo continuo fisso per Render con TEST IMMEDIATO FORZATO
 if __name__ == "__main__":
+    try:
+        # FORZIAMO IL MESSAGGIO FUORI DAL CICLO PER EVITARE BLOCCHI
+        import requests
+        url_tg = "https://telegram.org"
+        payload = {"chat_id": "8692534224", "text": "🚀 PROVA CLOUD RENDER INSERITA CON SUCCESSO!"}
+        requests.post(url_tg, json=payload, timeout=10)
+    except Exception:
+        pass
+
     while True:
         try:
             print("Controllo tornei FIT avviato sul cloud...")
-            # FORZIAMO IL MESSAGGIO DI PROVA DAL CLOUD IMMEDIATAMENTE
-            genera_report(["Torneo di Test dal Cloud ☁️"], [])
         except Exception as e:
             print(f"Errore nel ciclo continuo: {e}")
             
