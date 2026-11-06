@@ -51,7 +51,7 @@ def genera_report(novita, rimossi):
                 
         except Exception as e:
             print(f"Errore invio Telegram: {e}")
-            if __name__ == "__main__":
+    if __name__ == "__main__":
     while True:
         try:
             # Sostituisci la riga qui sotto con il comando esatto 
