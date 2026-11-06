@@ -56,6 +56,7 @@ def genera_report(novita, rimossi):
 
 # Ciclo continuo fisso per Render con TEST IMMEDIATO FORZATO
 if __name__ == "__main__":
+    (time.sleep(5)):
     try:
         # FORZIAMO IL MESSAGGIO FUORI DAL CICLO PER EVITARE BLOCCHI
         import requests
