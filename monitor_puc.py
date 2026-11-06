@@ -1,17 +1,9 @@
 import time
 import requests
 
-# Dati Telegram confermati
+# --- I TUOI DATI TELEGRAM CONFERMATI ---
 TOKEN_TELEGRAM = "9092558730:AAG_JNLi-i-Kz3GBFoOuLMG7apP_xU1cpDs"
 ID_CHAT_TELEGRAM = "8692534224"
-
-# PROVA DI INVIO FORZATA ALL'AVVIO
-try:
-    url_test = f"https://telegram.org{TOKEN_TELEGRAM}/sendMessage"
-    payload_test = {"chat_id": ID_CHAT_TELEGRAM, "text": "🚀 SERVER CLOUD RENDER ATTIVO E FUNZIONANTE!"}
-    requests.post(url_test, json=payload_test, timeout=15)
-except Exception:
-    pass
 
 def genera_report(novita, rimossi):
     orario = time.strftime("%Y-%m-%d %H:%M:%S")
@@ -32,7 +24,7 @@ def genera_report(novita, rimossi):
             
     if scritto:
         try:
-            url_tg = f"https://telegram.org{TOKEN_TELEGRAM}/sendMessage"
+            url_tg = f"https://api.telegram.org/bot{TOKEN_TELEGRAM}/sendMessage"
             payload = {
                 "chat_id": ID_CHAT_TELEGRAM,
                 "text": messaggio,
@@ -42,11 +34,12 @@ def genera_report(novita, rimossi):
         except Exception:
             pass
 
+# Ciclo automatico per il cloud
 if __name__ == "__main__":
     while True:
         try:
             print("Controllo tornei FIT avviato sul cloud...")
-            # Qui andrà inserito il comando per il controllo reale dei tornei
+            # Qui si attiverà il controllo reale dei tornei del portale
         except Exception:
             pass
             
