@@ -1,24 +1,20 @@
 import time
 import requests
 
-# ====================================================
-# 🔥 TEST ISTANTANEO FORZATO PER IL CLOUD
-# ====================================================
+# Dati Telegram confermati
+TOKEN_TELEGRAM = "9092558730:AAG_JNLi-i-Kz3GBFoOuLMG7apP_xU1cpDs"
+ID_CHAT_TELEGRAM = "8692534224"
+
+# PROVA DI INVIO FORZATA ALL'AVVIO
 try:
-    url_test = "https://telegram.org"
-    payload_test = {"chat_id": "8692534224", "text": "🚀 CONNETTIVITÀ CLOUD RENDER FUNZIONANTE AL 100%!"}
-    requests.post(url_test, json=payload_test, timeout=10)
-    print("Notifica di test inviata all'avvio del server!")
-except Exception as e:
-    print(f"Errore nel test iniziale: {e}")
-# ====================================================
+    url_test = f"https://telegram.org{TOKEN_TELEGRAM}/sendMessage"
+    payload_test = {"chat_id": ID_CHAT_TELEGRAM, "text": "🚀 SERVER CLOUD RENDER ATTIVO E FUNZIONANTE!"}
+    requests.post(url_test, json=payload_test, timeout=15)
+except Exception:
+    pass
 
 def genera_report(novita, rimossi):
     orario = time.strftime("%Y-%m-%d %H:%M:%S")
-    
-    TOKEN_TELEGRAM = "9092558730:AAG_JNLi-i-Kz3GBFoOuLMG7apP_xU1cpDs"
-    ID_CHAT_TELEGRAM = "8692534224"
-    
     messaggio = f"🔔 <b>AGGIORNAMENTO PUC ({orario})</b>\n\n"
     scritto = False
     
@@ -34,16 +30,6 @@ def genera_report(novita, rimossi):
         for r in rimossi:
             messaggio += f"• {r}\n"
             
-    try:
-        with open("report_tornei.txt", "a", encoding="utf-8") as f:
-            f.write(f"\n=== AGGIORNAMENTO PUC DEL {orario} ===\n")
-            if novita:
-                f.write(f"NUOVI:\n{str(novita)}\n")
-            if rimossi:
-                f.write(f"RIMOSSI:\n{str(rimossi)}\n")
-    except Exception:
-        pass
-            
     if scritto:
         try:
             url_tg = f"https://telegram.org{TOKEN_TELEGRAM}/sendMessage"
@@ -52,21 +38,17 @@ def genera_report(novita, rimossi):
                 "text": messaggio,
                 "parse_mode": "HTML"
             }
-            risposta = requests.post(url_tg, json=payload, timeout=10)
-            
-            if risposta.status_code != 200:
-                print(f"Telegram ha rifiutato il messaggio. Errore: {risposta.text}")
-            else:
-                print("Messaggio inviato a Telegram con successo!")
-        except Exception as e:
-            print(f"Errore invio Telegram: {e}")
+            requests.post(url_tg, json=payload, timeout=15)
+        except Exception:
+            pass
 
 if __name__ == "__main__":
     while True:
         try:
             print("Controllo tornei FIT avviato sul cloud...")
-        except Exception as e:
-            print(f"Errore nel ciclo continuo: {e}")
+            # Qui andrà inserito il comando per il controllo reale dei tornei
+        except Exception:
+            pass
             
         # Aspetta 1 ora (3600 secondi) prima di fare il prossimo controllo
         time.sleep(3600)
