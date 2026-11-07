@@ -12,7 +12,7 @@ def genera_report(novita, rimossi):
     ID_CHAT_TELEGRAM = "8692534224"
     
     messaggio = f"🔔 <b>AGGIORNAMENTO PUC DEL {orario}</b>\n\n"
-    scritto = True 
+    scritto = False 
     
     if novita:
         messaggio += "+ <b>NUOVI TORNEI:</b>\n"
